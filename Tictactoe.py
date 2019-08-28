@@ -1,6 +1,5 @@
 # Napisz kolko i krzyzyk.
 from Board import Board
-from FieldOption import FieldOption
 from GameState import GameState
 from Player import Player
 
@@ -17,7 +16,7 @@ class TicTacToe(object):
         else:
             self.activePlayer = Player.ONE
 
-    def start(self): #tylko tu print i input
+    def start(self):  # tylko tu print i input
 
         while self.gameState == GameState.IN_PROGRESS:
             print("Player: " + self.activePlayer.name + ": choose coordinate row: ")
@@ -27,7 +26,7 @@ class TicTacToe(object):
 
             if self.board.isMoveValid(chosenRow, chosenCol) == True:
                 self.board.makeMove(chosenRow, chosenCol, self.activePlayer)
-                self.gameState == self.board.checkGameState()
+                self.gameState = self.board.checkGameState()
                 self.switchPlayers()
             else:
                 print("Move is not valid. Try again")
@@ -35,17 +34,14 @@ class TicTacToe(object):
         else:
             self.result()
 
-
     def result(self):
         if Board.isBoardFull == True:
             print("Game over! It's a draw.")
 
         elif self.activePlayer == Player.ONE:
-                print("Game over! Player One wins.")
+            print("Game over! Player One wins.")
         else:
-                print("Game over! Player Two wins.")
-
-
+            print("Game over! Player Two wins.")
 
 
 tictactoe = TicTacToe()
