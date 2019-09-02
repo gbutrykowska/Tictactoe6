@@ -5,3 +5,4 @@ class FieldOption(Enum):
     O = 1
     X = 2
     EMPTY = 3
+

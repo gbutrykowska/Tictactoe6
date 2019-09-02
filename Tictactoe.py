@@ -19,29 +19,30 @@ class TicTacToe(object):
     def start(self):  # tylko tu print i input
 
         while self.gameState == GameState.IN_PROGRESS:
-            print("Player: " + self.activePlayer.name + ": choose coordinate row: ")
+            print("Player: " + self.activePlayer.name + ": choose coordinate row (starting from 0): ")
             chosenRow = int(input())
-            print("Player: " + self.activePlayer.name + ": choose coordinate col: ")
+            print("Player: " + self.activePlayer.name + ": choose coordinate col (starting from 0): ")
             chosenCol = int(input())
 
             if self.board.isMoveValid(chosenRow, chosenCol) == True:
                 self.board.makeMove(chosenRow, chosenCol, self.activePlayer)
                 self.gameState = self.board.checkGameState()
-                self.switchPlayers()
+                if self.gameState == GameState.IN_PROGRESS:
+                    self.switchPlayers()
+                    self.board.printBoard()
+                else: self.result()
             else:
                 print("Move is not valid. Try again")
 
-        else:
-            self.result()
-
     def result(self):
-        if Board.isBoardFull == True:
+        if self.board.isBoardFull():
             print("Game over! It's a draw.")
 
-        elif self.activePlayer == Player.ONE:
-            print("Game over! Player One wins.")
         else:
-            print("Game over! Player Two wins.")
+            if self.activePlayer == Player.ONE:
+                print("Game over! Player One wins.")
+            else:
+                print("Game over! Player Two wins.")
 
 
 tictactoe = TicTacToe()
