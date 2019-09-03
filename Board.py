@@ -10,43 +10,51 @@ class Board(object):
                       [FieldOption.EMPTY, FieldOption.EMPTY, FieldOption.EMPTY]]
 
     def __str__(self):
-        printedboard = [[field.name for field in row] for row in self.board]
-        return '\n'.join(map(str, printedboard))
+        boardString = ''
+        for fields in self.board:
+            for field in fields:
+                if field == FieldOption.EMPTY:
+                    boardString += '? '
+                else:
+                    boardString += field.name + ' '
+            boardString += '\n'
+
+        return boardString
 
     def checkGameState(self):
-        if self.isFirstRowO() == True:
+        if self.isFirstRowO():
             return GameState.OVER
-        if self.isFirstRowX() == True:
+        if self.isFirstRowX():
             return GameState.OVER
-        if self.isSecondRowO() == True:
+        if self.isSecondRowO():
             return GameState.OVER
-        if self.isSecondRowX() == True:
+        if self.isSecondRowX():
             return GameState.OVER
-        if self.isThirdRowO() == True:
+        if self.isThirdRowO():
             return GameState.OVER
-        if self.isThirdRowX() == True:
+        if self.isThirdRowX():
             return GameState.OVER
-        if self.isFirstColumnO() == True:
+        if self.isFirstColumnO():
             return GameState.OVER
-        if self.isFirstColumnX() == True:
+        if self.isFirstColumnX():
             return GameState.OVER
-        if self.isSecondColumnO() == True:
+        if self.isSecondColumnO():
             return GameState.OVER
-        if self.isSecondColumnX() == True:
+        if self.isSecondColumnX():
             return GameState.OVER
-        if self.isThirdColumnO() == True:
+        if self.isThirdColumnO():
             return GameState.OVER
-        if self.isThirdColumnX() == True:
+        if self.isThirdColumnX():
             return GameState.OVER
-        if self.isForwardDiagonalO() == True:
+        if self.isForwardDiagonalO():
             return GameState.OVER
-        if self.isForwardDiagonalX() == True:
+        if self.isForwardDiagonalX():
             return GameState.OVER
-        if self.isBackwardDiagonalO() == True:
+        if self.isBackwardDiagonalO():
             return GameState.OVER
-        if self.isBackwardDiagonalX() == True:
+        if self.isBackwardDiagonalX():
             return GameState.OVER
-        if self.isBoardFull() == True:
+        if self.isBoardFull():
             return GameState.OVER
         else:
             return GameState.IN_PROGRESS
@@ -130,6 +138,3 @@ class Board(object):
             self.board[row][col] = FieldOption.O
         else:
             self.board[row][col] = FieldOption.X
-
-    def printBoard(self): #tostring
-        print(self)
