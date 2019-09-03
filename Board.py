@@ -11,7 +11,7 @@ class Board(object):
 
     def __str__(self):
         printedboard = [[field.name for field in row] for row in self.board]
-        print(*printedboard, sep='\n')
+        return '\n'.join(map(str, printedboard))
 
     def checkGameState(self):
         if self.isFirstRowO() == True:
