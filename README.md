@@ -2,7 +2,7 @@
 
 My first attempt to create simple game in Python.
 
-##What I aimed to learn
+## What I aimed to learn
 - How to split the project into some files in orderly manner, and import functions between created modules.
 - Some better naming of classes, methods and variables
 - Just how cool are list comprehensions
