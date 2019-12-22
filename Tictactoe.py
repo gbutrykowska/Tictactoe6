@@ -1,4 +1,3 @@
-# Napisz kolko i krzyzyk.
 from Board import Board
 from GameState import GameState
 from Player import Player
@@ -11,37 +10,38 @@ class TicTacToe(object):
         self.board = Board()
 
     def switchPlayers(self):
-        if (self.activePlayer == Player.ONE):
+        if self.activePlayer == Player.ONE:
             self.activePlayer = Player.TWO
         else:
             self.activePlayer = Player.ONE
 
-    def start(self):  # tylko tu print i input
+    def start(self):
 
         while self.gameState == GameState.IN_PROGRESS:
-            print("Player: " + self.activePlayer.name + ": choose coordinate row: ")
+            print("Player: " + self.activePlayer.name + ": choose coordinate row (starting from 0): ")
             chosenRow = int(input())
-            print("Player: " + self.activePlayer.name + ": choose coordinate col: ")
+            print("Player: " + self.activePlayer.name + ": choose coordinate col (starting from 0): ")
             chosenCol = int(input())
 
-            if self.board.isMoveValid(chosenRow, chosenCol) == True:
+            if self.board.isMoveValid(chosenRow, chosenCol):
                 self.board.makeMove(chosenRow, chosenCol, self.activePlayer)
                 self.gameState = self.board.checkGameState()
-                self.switchPlayers()
+                if self.gameState == GameState.IN_PROGRESS:
+                    self.switchPlayers()
+                    print(self.board)
+                else:
+                    self.printGameResult()
             else:
                 print("Move is not valid. Try again")
 
-        else:
-            self.result()
-
-    def result(self):
-        if Board.isBoardFull == True:
+    def printGameResult(self):
+        if self.board.isBoardFull():
             print("Game over! It's a draw.")
-
-        elif self.activePlayer == Player.ONE:
-            print("Game over! Player One wins.")
         else:
-            print("Game over! Player Two wins.")
+            if self.activePlayer == Player.ONE:
+                print("Game over! Player One wins.")
+            else:
+                print("Game over! Player Two wins.")
 
 
 tictactoe = TicTacToe()
